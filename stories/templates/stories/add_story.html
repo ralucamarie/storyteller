@@ -1,0 +1,48 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+User Login
+{% endblock %}
+
+{% block content %}
+<div class='view-story-main-container'>
+    <a href="{% url 'stories:stories' %}"
+       class="mt-10 link-light
+   link-offset-2
+   link-underline-opacity-25
+   link-underline-opacity-100-hover">
+        All stories
+    </a>
+    <form method="post">
+        {% csrf_token %}
+        <div class="d-flex align-items-center flex-column">
+            <div class="form-group">
+                {{ story_form.name }}
+            </div>
+            <div class="form-group">
+                <div class="container mt-0 d-flex flex-column align-items-center">
+                    <div class="mb-3">
+                        {{ story_form.new_category}}
+                    </div>
+                    <div class="row">
+                        {% for category in story_form.categories %}
+                        <div class="col-4">
+                            <span>{{ category.tag }} </span>
+                            <span>{{ category.choice_label }}</span>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-dark mt-3">Save</button>
+
+            <hr class="dotted mt-3 w-50">
+
+            <div class="d-flex flex-column align-items-center">
+                {{ description_form }}
+            </div>
+        </div>
+    </form>
+</div>
+{% endblock %}

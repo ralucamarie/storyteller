@@ -1,0 +1,73 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+Illums
+{% endblock %}
+
+{% block content %}
+
+<div class="stories-main-container">
+    <div class="d-flex align-items-center justify-content-between mb-5">
+        <div>{{total_stories}}
+            {% if total_stories == 1 %}
+            Story
+            {% else %}
+            Stories
+            {% endif %}
+        </div>
+
+        {% if search_by %}
+        <div>
+            Searched by:
+            <div class="btn btn-outline-light opacity-75 category-btn ms-2 text-hover-dark">
+                <span class="px-2">{{ search_text }}</span>
+                <a class="text-hover-dark" href="{% url 'stories:stories' %}"><i class="fa fa-times mx-1"
+                                                                                 aria-hidden="true"></i></a></div>
+        </div>
+        {% endif %}
+    </div>
+
+    {% for story in stories %}
+    <div class="d-flex flex-column align-items-center">
+
+        <div class="d-flex flex-column">
+            <h2 class="story-title m-0">{{ story.name }}</h2>
+            <div class="fs-7 text text-center author-stories mt-1">
+                <a href="{% url 'stories:stories' %}?search_by='owner'&search_text={{story.owner.username}}" class="link-light link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">
+                    by <span class="fs-5 text">{{ story.owner.username }}</span>
+                </a>
+            </div>
+        </div>
+
+        <p class="text-center mt-3">
+            {% for category in story.categories.all %}
+            <a href="{% url 'stories:stories' %}?search_by=category&search_text={{ category.name }}"
+               class="btn btn-outline-light opacity-75 category-btn ">
+                {{category}}</a>
+            {% endfor %}
+        </p>
+        {% for paraghraph in story.descriptions.all|slice:":1" %}
+        <p class="story-content-list mt-3">{{ paraghraph.description_text|truncatechars:1000 }}</p>
+        {% endfor %}
+        <a class="link-light link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover text-center w-50 opacity-75"
+           href="{% url 'stories:view_story' story.id %}">read more</a>
+        <hr class="dotted mt-1 w-50">
+
+    </div>
+
+    {% endfor %}
+</div>
+{% endblock %}
+
+{% block extra_body_class %}
+homepage-background
+{% endblock %}
+
+
+{% block extra_scripts %}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        document.getElementById('autoFocusTextarea').focus();
+    });
+</script>
+{% endblock %}

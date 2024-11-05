@@ -1,0 +1,239 @@
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Slab:ital,wght@0,100..700;1,100..700&display=swap')
+@import url('https://fonts.googleapis.com/css2?family=Afacad+Flux:wght@100..1000&family=Josefin+Slab:ital,wght@0,100..700;1,100..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Waterfall&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Arima:wght@100..700&family=Waterfall&display=swap');
+
+
+* {
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Josefin Slab", serif;
+    background-color: black;
+    height: 100vh;
+    display: grid;
+    place-content: center;
+    font-size: 1rem;
+    background-color: black;
+    color: whitesmoke;
+}
+
+a {
+    font-family: "Josefin Slab", serif;
+    text-decoration: none;
+}
+
+.logo-text {
+    color: #6f7173;
+    font-size: 2rem;
+    font-weight: 700;
+    margin-top: -0.5rem;
+}
+
+.logo-text:hover{
+    color: #ffffff;
+}
+
+.page-wrapper {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            width:80%;
+        }
+
+.content-wrapper {
+            flex: 1;
+        }
+
+.main-content {
+            width: 80%;
+            height: 100%;
+            margin: 0 auto;
+        }
+
+footer {
+            text-align: center;
+            margin-top: auto; /* Ensures the footer stays at the bottom */
+        }
+
+
+nav {
+    font-family: "Josefin Slab", serif;
+    font-size: 1.2rem;
+    padding: 0 5rem;
+    height: 5rem;
+}
+
+p{
+font-family: "Arima", system-ui;
+font-weight: 200;
+margin-bottom: 0.5rem;
+}
+
+footer {
+background-color: transparent;
+}
+
+.text-hover-dark{
+    color: whitesmoke;
+}
+
+.text-hover-dark:hover {
+    color: #000000;
+}
+
+.minimal-textarea {
+    background-color: black;
+    color: #d3d3d3; /* Dirty white text */
+    border: none; /* Remove border */
+    outline: none; /* Remove the outline on focus */
+    caret-color: #d3d3d3; /* Make cursor dirty white */
+    resize: none; /* Disable resize handle */
+    text-align: center;
+}
+
+.minimal-textarea:focus{
+    background-color: black;
+    color: #d3d3d3;
+    border: none;
+    box-shadow: none;
+    outline: none;
+}
+
+.story-title{
+    background-color: black;
+    color: #d3d3d3; /* Dirty white text */
+    border: none; /* Remove border */
+    outline: none; /* Remove the outline on focus */
+    caret-color: #d3d3d3; /* Make cursor dirty white */
+    resize: none; /* Disable resize handle */
+    text-align: center;
+    font-family: "Arima", system-ui;
+    font-weight: 500;
+    font-size: 3rem;
+}
+
+
+.placeholder-centered::placeholder {
+    text-align: center;
+}
+
+.story-container{
+    width: 80%;
+    height: 20rem;
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
+    margin-top:3rem
+    text-align: center;
+    }
+
+.edit-story-container{
+    font-size: 1.5rem;
+    text-align: center;
+}
+
+.hidden {
+   display: none;
+}
+
+.story-content{
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
+    text-align: center;
+    font-family: "Josefin Slab", serif;
+    width: 100%; /* Make sure the container fits within its parent */
+    overflow-wrap: break-word; /* Ensure that words don't cause overflow */
+    }
+
+
+.story-content p {
+    white-space: normal; /* Ensure text wraps */
+    word-wrap: break-word; /* Break long words if needed */
+}
+
+.story-content-list{
+    font-size: 1rem;
+    margin-top--2rem
+    margin-bottom: 1rem;
+    text-align: center;
+    font-weight: 200;
+
+}
+
+.author{
+font-family: "Josefin Slab", serif;
+    color: green;
+    font-size:1rem;
+}
+
+.author-stories{
+    margin-top: -2rem;
+    font-family: "Josefin Slab", serif;
+    }
+
+.register-container {
+    margin-top: 20rem;
+    height: 100%
+}
+
+.main-container{
+    max-width: 60%;
+    }
+
+.stories-main-container{
+    margin-top: 5rem;
+}
+
+.nav-container{
+    max-width: 80%;
+}
+
+
+
+
+.view-story-main-container{
+    margin-top: 5rem;
+}
+
+.view-story-main-container, .story-content {
+    max-width: 100%;
+}
+
+
+.homepage-background {
+    background-image: url('../images/main_background.jpg'); /* Path to your background image */
+    background-size: cover;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 100vh; /* Full viewport height */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.register-card {
+    border-radius: 25px;
+    background-color: black;
+    box-shadow: 1px 1px 10px 3px #222;
+    background-image: url('../images/register_background.jpg'); /* Path to your background image */
+    background-size: cover;
+    background-position: center;
+    margin-top:3rem;
+}
+
+.category-btn{
+    font-family: "Josefin Slab", serif;
+    font-size: 0.9rem;
+    padding: .2rem .5rem;
+}
+
+
+a.username{
+    color: #ffffff;
+    font-size: 1.2rem;
+    font-weight: 500;
+}

@@ -1,0 +1,113 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+User Login
+{% endblock %}
+
+{% block content %}
+<div class='view-story-main-container'>
+    <a href="{% url 'stories:stories' %}"
+       class="mt-10 link-light
+   link-offset-2
+   link-underline-opacity-25
+   link-underline-opacity-100-hover">
+        All stories
+    </a>
+    <div class="d-flex flex-column align-items-center">
+        <div class="story-title mt-5 pb-0">{{ story.name }}</div>
+        <div class="text-center author-stories mt-1">
+            <a class="link-light link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover"
+               href="{% url 'stories:stories'%}?search_by=owner&search_text={{ story.owner.username }}">
+                by <span class="fs-5 text">{{ story.owner.username }}</span>
+            </a>
+        </div>
+        <p class="text-center mt-3">
+            {% for category in categories %}
+            <a href="{% url 'stories:stories' %}?search_by=category&search_text={{ category.name }}" class="text-decoration-none btn btn-outline-light opacity-75 category-btn ">
+                {{category}}</a>
+            {% endfor %}
+        </p>
+
+        <div class="story-content flex flex-column mt-5">
+            {% for description in descriptions %}
+            <div class="description-item">
+                <p class="description-text" data-description-id="{{ description.id }}">{{ description.description_text }}
+                     <span class="me-3 author"> - by <a href="{% url 'stories:stories' %}?search_by=owner&search_text={{ description.added_by.username }}" class="cursor-pointer author"> {{ description.added_by.username }}</a></span>
+                    {% if user.username == description.added_by.username %}
+                    <i class="fa fa-pencil-square opacity-75 btn p-0 edit-btn" aria-hidden="true"
+                       data-description-id="{{description.id}}"></i>
+                    <a href="{% url 'stories:delete_description' story.id description.id %}" title="Delete Description"
+                       onclick="return confirm('Are you sure you want to delete this description?');">
+                        <i class="fa fa-minus-square opacity-75 btn p-0" aria-hidden="true"></i>
+                    </a>
+                    {% endif %}
+                </p>
+                <form method="POST" action="{% url 'stories:edit_description' story.id description.id %}"
+                      class="edit-form hidden mb-3 d-flex flex-column align-items-center"
+                      data-description-id="{{description.id}}">
+                    {% csrf_token %}
+                    <textarea name="description_text" class="form-control edit_element hidden minimal-textarea edit-story-container placeholder-centered"
+                           data-description-id="{{description.id}}">{{description.description_text}}</textarea>
+                    <hr class="hidden edit_element dotted mt-3 w-50" data-description-id="{{description.id}}">
+                    <button type="submit" class="hidden edit_element btn btn-dark mt-3" data-description-id="{{description.id}}">Save</button>
+                </form>
+            </div>
+            {% endfor %}
+        </div>
+        <hr class="dotted mt-3">
+        <form method="POST">
+            <div class="d-flex flex-column align-items-center">
+                <button type="submit"
+                        id="save-new-button"
+                        class="save-new-button hidden btn btn-dark mt-3">Save</button>
+                <hr class="dotted mt-3 w-50">
+                {% csrf_token %}
+                {{ form }}
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_scripts %}
+<script>
+function autoResize(textarea) {
+    textarea.style.height = 'auto'; // Reset height
+    textarea.style.height = textarea.scrollHeight + 'px'; // Set new height
+}
+</script>
+<script>
+const descriptionInput = document.getElementById('description_text_input');
+console.log(descriptionInput)
+const saveNewButton = document.getElementById('save-new-button');
+descriptionInput.addEventListener('input', () => {
+    console.log(descriptionInput.value)
+    saveNewButton.classList.toggle("hidden", !descriptionInput.value.trim());
+    console.log(saveNewButton.classList)
+});
+document.addEventListener('DOMContentLoaded', function() {
+document.querySelectorAll('.edit-btn').forEach(button => {
+    button.addEventListener('click', function() {
+        const descriptionId = this.getAttribute('data-description-id');
+        const descriptionText = document.querySelector(`.description-text[data-description-id="${descriptionId}"]`);
+        const editForm = document.querySelector(`.edit-form[data-description-id="${descriptionId}"]`);
+        const editElements = document.querySelectorAll(`.edit_element[data-description-id="${descriptionId}"]`);
+
+        if (descriptionText && editForm) {
+            editForm.classList.toggle('hidden');
+            editElements.forEach(element => element.classList.toggle('hidden'));
+            console.log(editElements)
+            descriptionText.style.display = editForm.classList.contains('hidden') ? 'block' : 'none';
+            console.log(editForm.style)
+            if (editForm.style.display !== 'none') {
+                    const textarea = editForm.querySelector('textarea');
+                    autoResize(textarea);
+                }
+        } else {
+            console.error("Elements not found for ID:", descriptionId);
+        }
+    });
+});
+});
+</script>
+{% endblock %}

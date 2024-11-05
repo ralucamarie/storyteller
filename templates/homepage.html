@@ -1,0 +1,26 @@
+{% extends 'layout.html' %}
+{% load static %}
+
+{% block title %}
+Homepage
+{% endblock %}
+
+{% block content %}
+
+<div class="container w-100 h-100 d-flex flex-column align-items-center justify-content-center">
+    <div class="d-flex">
+        <a href="{% url 'stories:stories' %}" type="button" class="btn btn-outline-warning me-1" role="button"
+           aria-pressed="true">Bring a
+            spark</a>
+        <a href="{% url 'stories:add_story' %}" type="button" class="btn btn-outline-danger ms-1" role="button"
+           aria-pressed="true">Tell a
+            story</a>
+    </div>
+
+</div>
+
+{% endblock %}
+
+{% block extra_body_class %}
+homepage-background
+{% endblock %}

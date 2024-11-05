@@ -1,0 +1,96 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+Register a new User
+{% endblock %}
+
+{% block content %}
+<div class="row d-flex justify-content-center align-items-center mt-10">
+    <div class="col-lg-4 col-xl-6">
+        <div class="card text-white register-card">
+            <div class="card-body p-md-5">
+                <div class="row justify-content-center">
+                    <div class="col-md-12 col-lg-12 col-xl-10 order-2 order-lg-1">
+
+                        <p class="text-center h1 fw-bold mx-1 mx-md-4 mt-4">Sign up</p>
+
+                        <!-- Use Django's form tag -->
+                        <form class="mx-1 mx-md-4" action="/users/register/" method="POST">
+                            {% csrf_token %}
+
+                            <!-- First Name Field -->
+                            <div class="d-flex flex-row align-items-center mb-2">
+                                <i class="fas fa-user fa-lg me-3 fa-fw"></i>
+                                <div class="form-outline flex-fill mb-0">
+                                    <label for="{{ form.first_name.id_for_label }}"
+                                           class="form-label">{{ form.first_name.label }}</label>
+                                    {{ form.first_name }}
+                                </div>
+                            </div>
+
+                            <!-- Last Name Field -->
+                            <div class="d-flex flex-row align-items-center mb-2">
+                                <i class="fas fa-user fa-lg me-3 fa-fw"></i>
+                                <div class="form-outline flex-fill mb-0">
+                                    {{ form.last_name.label_tag }}
+                                    {{ form.last_name }}
+                                </div>
+                            </div>
+
+                            <!-- Username Field -->
+                            <div class="d-flex flex-row align-items-center mb-2">
+                                <i class="fas fa-user fa-lg me-3 fa-fw"></i>
+                                <div class="form-outline flex-fill mb-0">
+                                    {{ form.username.label_tag }}
+                                    {{ form.username }}
+                                </div>
+                            </div>
+
+                            <!-- Email Field -->
+                            <div class="d-flex flex-row align-items-center mb-2">
+                                <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
+                                <div class="form-outline flex-fill mb-0">
+                                    {{ form.email.label_tag }}
+                                    {{ form.email }}
+                                </div>
+                            </div>
+
+                            <!-- Password1 Field -->
+                            <div class="d-flex flex-row align-items-center mb-2">
+                                <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
+                                <div class="form-outline flex-fill mb-0">
+                                    {{ form.password1.label_tag }}
+                                    {{ form.password1 }}
+                                </div>
+                            </div>
+
+                            <!-- Password2 Field -->
+                            <div class="d-flex flex-row align-items-center mb-2">
+                                <i class="fas fa-key fa-lg me-3 fa-fw"></i>
+                                <div class="form-outline flex-fill mb-0">
+                                    {{ form.password2.label_tag }}
+                                    {{ form.password2 }}
+                                </div>
+                            </div>
+
+
+                            <div class="d-flex justify-content-center mx-4 mb-2 mb-lg-4">
+                                <button type="submit" class="btn btn-primary btn-lg">Register</button>
+                            </div>
+
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Include Bootstrap JS and Popper.js (optional) -->
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+{% endblock %}
